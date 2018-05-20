@@ -4,7 +4,7 @@ import { bindActionCreators } from "redux";
 
 import MessageList from "./MessageList";
 
-import getChatLog from "./service";
+import { getChatLog } from "./service";
 
 import "./App.css";
 

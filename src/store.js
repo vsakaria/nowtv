@@ -1,16 +1,23 @@
-import { createStore, applyMiddleware } from 'redux';
-import promiseMiddleware from 'redux-promise-middleware';
+import { createStore, applyMiddleware } from "redux";
+import promiseMiddleware from "redux-promise-middleware";
 
-export function reducer(state, action = {}) {
-  return Object.assign({}, state, {
-    messages: action.payload
-  });
+export function reducer(state = {}, action = {}) {
+  switch (action.type) {
+    case "MESSAGES_LOADING_FULFILLED":
+      return Object.assign({}, state, {
+        messages: action.payload
+      });
+    case "MEMBERS_LOADING_FULFILLED":
+      return Object.assign({}, state, {
+        members: action.payload
+      });
+    default:
+      return state;
+  }
 }
 
 export const store = createStore(
   reducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-  applyMiddleware(
-    promiseMiddleware()
-  )
+  applyMiddleware(promiseMiddleware())
 );

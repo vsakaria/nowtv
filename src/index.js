@@ -5,9 +5,10 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import App from "./App";
 import "./index.css";
-import getChatLog from "./service";
+import { getChatLog, getMembersData } from "./service";
 
 store.dispatch(getChatLog());
+store.dispatch(getMembersData());
 
 ReactDOM.render(
   <Provider store={store}>
