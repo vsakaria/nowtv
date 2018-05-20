@@ -5,6 +5,7 @@ import { bindActionCreators } from "redux";
 import MessageList from "./MessageList";
 
 import { getChatLog } from "./service";
+import { getEnrichedMessages } from "./store";
 
 import "./App.css";
 
@@ -12,13 +13,13 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      messages: []
+      enrichedMessages: []
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.props.messages !== nextProps.messages) {
-      this.setState({ messages: nextProps.messages });
+    if (this.props.enrichedMessages !== nextProps.enrichedMessages) {
+      this.setState({ enrichedMessages: nextProps.enrichedMessages });
     }
   }
 
@@ -26,7 +27,7 @@ class App extends Component {
     return (
       <section>
         <h1>Messages</h1>
-        <MessageList messages={this.state.messages} />
+        <MessageList messages={this.state.enrichedMessages} />
       </section>
     );
   }
@@ -34,7 +35,7 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-    messages: state.messages
+    enrichedMessages: getEnrichedMessages(state)
   };
 };
 

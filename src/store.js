@@ -21,3 +21,20 @@ export const store = createStore(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
   applyMiddleware(promiseMiddleware())
 );
+
+export const getEnrichedMessages = state => {
+  if (state.messages && state.members) {
+    return state.messages.map(message => {
+      const foundMember = state.members.find(
+        member => member.id === message.userId
+      );
+      return {
+        body: message.message,
+        avatar: foundMember.avatar,
+        email: foundMember.email,
+        timeStamp: message.timestamp,
+        id: message.id
+      };
+    });
+  }
+};
