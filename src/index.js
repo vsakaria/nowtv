@@ -1,11 +1,11 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 
-import { store } from './store';
-import App from './App';
-import './index.css';
-import getChatLog from './service';
+import { store } from "./store";
+import App from "./App";
+import "./index.css";
+import getChatLog from "./service";
 
 store.dispatch(getChatLog());
 
@@ -13,5 +13,5 @@ ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
+  document.getElementById("root")
 );

@@ -1,26 +1,44 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-import getChatLog from './service';
+import MessageList from "./MessageList";
 
-import './App.css';
+import getChatLog from "./service";
+
+import "./App.css";
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      messages: []
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.messages !== nextProps.messages) {
+      this.setState({ messages: nextProps.messages });
+    }
+  }
+
   render() {
     return (
-      <h1>Hello!</h1>
+      <section>
+        <h1>Messages</h1>
+        <MessageList messages={this.state.messages} />
+      </section>
     );
   }
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    messages: state.messages
+  };
 };
 
-const mapDispatchToProps = dispatch => bindActionCreators({ getChatLog }, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ getChatLog }, dispatch);
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
